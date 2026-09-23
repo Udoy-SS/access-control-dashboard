@@ -1,0 +1,10 @@
+{
+  "name": "access-control-attendance-dashboard-fullstack",
+  "version": "1.0.0",
+  "description": "Full-stack React & Node.js Access Control & Attendance Dashboard",
+  "scripts": {
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build"
+  }
+}

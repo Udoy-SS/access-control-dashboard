@@ -1,0 +1,804 @@
+/* ==========================================================================
+   Circular Category Buttons (Matching PDF Mockups Figures 01-05, 08-09)
+   ========================================================================== */
+
+.category-nav-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 30px 10px;
+}
+
+.circular-cat-btn {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  color: var(--text-main);
+  position: relative;
+}
+
+.circular-cat-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.circular-cat-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Outer circular ring with double border / accent */
+.cat-circle-ring {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3.5px solid #d90429; /* Red accent ring from PDF */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-card);
+  box-shadow: 0 4px 12px rgba(217, 4, 41, 0.15);
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.circular-cat-btn:hover .cat-circle-ring {
+  box-shadow: 0 8px 24px rgba(217, 4, 41, 0.3);
+  border-color: #ef233c;
+}
+
+.cat-circle-ring.ring-teal {
+  border-color: #0284c7;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+}
+
+.circular-cat-btn:hover .cat-circle-ring.ring-teal {
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.3);
+}
+
+.cat-icon-svg {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  fill: currentColor;
+}
+
+.cat-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-main);
+  max-width: 130px;
+  line-height: 1.2;
+}
+
+/* Usage Bar Metric Badges */
+.usage-metric-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.metric-circle-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  background: var(--surface-muted);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.usage-metric-badge:hover .metric-circle-avatar {
+  border-color: var(--primary-brand);
+  transform: scale(1.08);
+}
+
+.pct-overlay {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  background: var(--primary-brand);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 8px;
+}
+
+.metric-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.metric-title {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-align: center;
+}
+
+.metric-sub {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Overview Chart Layout */
+.overview-content-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.overview-top-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+}
+
+.date-range-display {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.period-toggle-group {
+  display: flex;
+  background: var(--surface-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.period-btn {
+  background: none;
+  border: none;
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.period-btn.active {
+  background: var(--surface-card);
+  color: var(--primary-brand);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Chart Canvas with Side KPI & Legend */
+.chart-and-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.chart-area-box {
+  flex: 1;
+  position: relative;
+  min-height: 280px;
+}
+
+.chart-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.overview-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.chart-side-kpi {
+  width: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+/* Total Widget Circle (Matching Fig 01: Total 1527) */
+.total-kpi-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #788718 0%, #58650f 100%);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(88, 101, 15, 0.4);
+  user-select: none;
+}
+
+.total-kpi-circle .kpi-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.total-kpi-circle .kpi-value {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+/* Chart Legend */
+.chart-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Chart Tooltip */
+.chart-tooltip {
+  position: absolute;
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  font-size: 0.82rem;
+  transform: translate(-50%, -100%);
+  margin-top: -10px;
+  z-index: 10;
+}
+
+.tooltip-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 6px 0;
+}
+
+.tooltip-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.tooltip-badge {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tooltip-val {
+  font-weight: 700;
+  margin-left: auto;
+}
+
+/* ==========================================================================
+   Data Table Components
+   ========================================================================== */
+.table-card {
+  margin-top: 24px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.table-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: var(--surface-muted);
+  border-bottom: 1px solid var(--border-card);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.table-title-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.table-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.record-counter {
+  font-size: 0.75rem;
+  background: var(--primary-brand);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-input-box {
+  display: flex;
+  align-items: center;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  gap: 6px;
+}
+
+.search-input-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  width: 170px;
+}
+
+.btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.btn-secondary {
+  background: var(--surface-card);
+  border-color: var(--border-subtle);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-muted);
+  border-color: var(--primary-brand);
+  color: var(--primary-brand);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.data-table th {
+  background: var(--surface-muted);
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-card);
+}
+
+.data-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-card);
+  color: var(--text-main);
+}
+
+.data-table tr:hover {
+  background: rgba(2, 132, 199, 0.04);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.status-active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+[data-theme="dark"] .status-active {
+  background: #064e3b;
+  color: #86efac;
+}
+
+.status-inactive, .status-suspended {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+[data-theme="dark"] .status-inactive, [data-theme="dark"] .status-suspended {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.bio-badges {
+  display: flex;
+  gap: 4px;
+}
+
+.bio-badges .badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.badge.b-on {
+  background: #0284c7;
+  color: #fff;
+}
+
+.badge.b-off {
+  background: var(--border-subtle);
+  color: var(--text-muted);
+}
+
+.badge-attn {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-acs {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* ==========================================================================
+   Flowchart & Diagram Components (Figures 06, 07, 10)
+   ========================================================================== */
+.diagram-card {
+  margin-top: 24px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+}
+
+.diagram-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-card);
+  padding-bottom: 12px;
+}
+
+.diagram-badge {
+  background: #d90429;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.diagram-tip {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Figure 06 Flowchart styling */
+.access-flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.flow-row-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.flow-node {
+  padding: 14px 22px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+  user-select: none;
+}
+
+.flow-node:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.node-primary {
+  background: #4682b4; /* Steel Blue matching PDF Fig 06 */
+  color: #ffffff;
+  border: 1px solid #36648b;
+}
+
+.node-success {
+  background: #76a035; /* Olive Green matching PDF Fig 06 */
+  color: #ffffff;
+  border: 1px solid #5a7d28;
+}
+
+.node-warning {
+  background: #85bb5c; /* Light Olive Green matching PDF Fig 06 */
+  color: #ffffff;
+  border: 1px solid #6aa042;
+}
+
+.node-outline {
+  background: var(--surface-card);
+  border: 2px solid #76a035;
+  color: var(--text-main);
+}
+
+.node-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Arrows */
+.arrow-h {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 60px;
+}
+
+.arrow-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #d90429;
+  margin-bottom: 2px;
+}
+
+.arrow-line {
+  height: 6px;
+  background: #d90429;
+  width: 100%;
+}
+
+.arrow-head-right {
+  width: 0; 
+  height: 0; 
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 14px solid #d90429;
+  position: absolute;
+  right: -10px;
+  top: 13px;
+}
+
+.flow-row-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.red-v-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.v-line {
+  width: 8px;
+  height: 36px;
+  background: #d90429;
+}
+
+.v-arrow-head-up {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid #d90429;
+}
+
+.v-arrow-head-down {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid #d90429;
+}
+
+.flow-node-row {
+  display: flex;
+  gap: 20px;
+}
+
+/* Figure 07 & 10 Tree Elements */
+.door-flowchart, .device-flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.tree-level {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.arrow-h-simple {
+  font-size: 1.8rem;
+  color: #76a035;
+  font-weight: 700;
+}
+
+.tree-down-arrow .big-down-arrow {
+  font-size: 2.5rem;
+  color: #76a035;
+  line-height: 1;
+}
+
+.tree-down-arrow .blue-down {
+  color: #4682b4;
+}
+
+.level-systems {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  width: 100%;
+}
+
+.system-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.branch-arrow {
+  font-size: 1.5rem;
+  color: #76a035;
+}
+
+.door-pill {
+  background: #d68910; /* Orange/Gold box from Fig 07 */
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.door-pill:hover {
+  background: #b9770e;
+  transform: scale(1.04);
+}
+
+/* Figure 10 Topology Grid */
+.topology-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.topology-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.col-header {
+  width: 100%;
+  padding: 12px 10px;
+  text-align: center;
+  border: 2px solid #76a035;
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: var(--surface-card);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.col-arrow {
+  font-size: 1.6rem;
+  color: #4682b4;
+  line-height: 1;
+}
+
+.col-list {
+  width: 100%;
+  background: #4682b4; /* Deep blue container from Fig 10 */
+  padding: 16px 12px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 160px;
+}
+
+.topology-item {
+  color: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.topology-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.more-item {
+  border-bottom: none;
+  opacity: 0.7;
+  letter-spacing: 2px;
+}

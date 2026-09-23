@@ -1,0 +1,35 @@
+{
+  "testTitle": "Pubali Bank PLC - Nationwide Peak-Hour Biometric Stress Test",
+  "timestamp": "2026-09-13T11:19:39.878Z",
+  "configuration": {
+    "totalEmployees": 35000,
+    "totalTerminals": 1250,
+    "totalBranches": 829,
+    "batchSize": 50,
+    "concurrencyWorkers": 25,
+    "server": "http://localhost:5050"
+  },
+  "performanceMetrics": {
+    "totalPunchesProcessed": 35000,
+    "totalBatches": 700,
+    "successCount": 700,
+    "failCount": 0,
+    "successRatePct": 100,
+    "totalDurationSeconds": 0.48,
+    "punchesPerSecond": 73375.3,
+    "requestsPerSecond": 1467.5,
+    "latencyBatchMs": {
+      "min": 3.02,
+      "mean": 16.5,
+      "p50": 15.1,
+      "p90": 21.96,
+      "p95": 26.08,
+      "p99": 54.02,
+      "max": 58.59
+    },
+    "latencyPerPunchMs": {
+      "mean": 0.33,
+      "p95": 0.522
+    }
+  }
+}

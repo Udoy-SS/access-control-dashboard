@@ -1,0 +1,69 @@
+:root {
+  /* Color Palette - Light Mode (Teal / Executive Slate matching PDF) */
+  --bg-app: #f4f6f9;
+  --surface-card: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-glass: rgba(255, 255, 255, 0.85);
+
+  --primary-brand: #0284c7;
+  --primary-teal: #0ea5e9;
+  --primary-header-bg: #48cae4;
+  --header-bar-bg: linear-gradient(90deg, #38bdf8 0%, #0284c7 100%);
+  --header-bar-teal: #48cae4;
+
+  --accent-cyan: #00b4d8;
+  --accent-amber: #f59e0b;
+  --accent-red: #ef4444;
+  --accent-green: #10b981;
+  --accent-blue: #3b82f6;
+
+  --border-card: #e2e8f0;
+  --border-subtle: #cbd5e1;
+  --border-focus: #0284c7;
+
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --text-inverse: #ffffff;
+
+  --badge-ring-red: #ef4444;
+  --badge-ring-teal: #0ea5e9;
+  --badge-ring-amber: #f59e0b;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 15px rgba(2, 132, 199, 0.25);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+[data-theme="dark"] {
+  --bg-app: #0b1120;
+  --surface-card: #151e32;
+  --surface-muted: #1e293b;
+  --surface-glass: rgba(21, 30, 50, 0.85);
+
+  --primary-brand: #38bdf8;
+  --primary-teal: #0284c7;
+  --header-bar-bg: linear-gradient(90deg, #0369a1 0%, #0f172a 100%);
+  --header-bar-teal: #0284c7;
+
+  --border-card: #1e293b;
+  --border-subtle: #334155;
+
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 14px rgba(0,0,0,0.5);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.35);
+}

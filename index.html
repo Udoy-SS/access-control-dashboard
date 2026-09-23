@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Control & Attendance Reporting System</title>
+  <meta name="description" content="Enterprise Access Control, Attendance, and Device Management Dashboard & Reporting System.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Top Nav Bar -->
+    <header class="top-nav" role="banner">
+      <div class="brand-section">
+        <h1 class="brand-title">
+          <span class="brand-icon">🛡️</span>
+          Dashboard
+        </h1>
+        <button class="btn-launch" id="btnLaunchNewDashboard" title="Open multi-monitor dashboard launcher">
+          Launch New Dashboard ↗
+        </button>
+      </div>
+
+      <div class="nav-actions">
+        <span class="time-badge" id="systemClock">21 May 2026 14:30</span>
+        <button class="btn btn-secondary btn-sm" id="themeToggleBtn" aria-label="Toggle dark and light theme">
+          🌙 Dark
+        </button>
+      </div>
+    </header>
+
+    <!-- Breadcrumbs Navigation -->
+    <nav class="breadcrumb-bar" id="breadcrumbNav" aria-label="Breadcrumb navigation">
+      <span class="crumb current">Dashboard</span>
+    </nav>
+
+    <!-- Main Dynamic Card -->
+    <main class="main-view-card" id="mainCardView" role="main">
+      <!-- 1. OVERVIEW VIEW (Figure 01) -->
+      <section id="viewOverview" class="fade-in">
+        <div class="card-header-bar">
+          <h2 class="card-header-title">Overview</h2>
+          <div class="card-header-actions">
+            <!-- Period toggle in header if needed -->
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="overview-content-layout">
+            <div class="overview-top-filter-bar">
+              <span class="date-range-display" id="overviewDateRange">15 May 2026 – 21 May 2026</span>
+              <div class="period-toggle-group" role="tablist">
+                <button class="period-btn active" data-period="week" role="tab" aria-selected="true">Week</button>
+                <button class="period-btn" data-period="month" role="tab" aria-selected="false">Month</button>
+                <button class="period-btn" data-period="year" role="tab" aria-selected="false">Year</button>
+              </div>
+            </div>
+
+            <div class="chart-and-stats-row">
+              <div class="chart-area-box" id="chartContainer">
+                <!-- SVG Chart Injected Here by chart.js -->
+              </div>
+
+              <!-- Side KPI Circle & Legend (Figure 01) -->
+              <div class="chart-side-kpi">
+                <div class="total-kpi-circle">
+                  <span class="kpi-label">Total</span>
+                  <span class="kpi-value" id="overviewTotalValue">1527</span>
+                </div>
+
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <span class="legend-color-dot" style="background: #00b4d8;"></span>
+                    <span>1:N duplex authenti...</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-color-dot" style="background: #f59e0b;"></span>
+                    <span>Access denied (Do...</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-color-dot" style="background: #ef4444;"></span>
+                    <span>Tamper on</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. REPORT HUB VIEW (Figures 02, 04, 08) -->
+      <section id="viewReportHub" class="fade-in" style="display: none;">
+        <div class="card-header-bar">
+          <h2 class="card-header-title">Report</h2>
+          <div class="card-header-actions">
+            <div class="period-toggle-group">
+              <button class="period-btn active" data-period="week">Week</button>
+              <button class="period-btn" data-period="month">Month</button>
+              <button class="period-btn" data-period="year">Year</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="category-nav-grid">
+            <!-- User Report Card -->
+            <button class="circular-cat-btn" id="cardUserReport" aria-label="Open User Report">
+              <div class="cat-circle-ring">
+                <!-- User report SVG icon -->
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="10" y="6" width="28" height="36" rx="4" />
+                  <circle cx="24" cy="18" r="5" />
+                  <path d="M16 32c0-4.4 3.6-7 8-7s8 2.6 8 7" />
+                  <line x1="16" y1="38" x2="32" y2="38" />
+                </svg>
+              </div>
+              <span class="cat-label">User Report</span>
+            </button>
+
+            <!-- Access Report Card -->
+            <button class="circular-cat-btn" id="cardAccessReport" aria-label="Open Access Report">
+              <div class="cat-circle-ring">
+                <!-- Key / Access SVG icon -->
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="24" r="10" />
+                  <circle cx="18" cy="24" r="4" />
+                  <line x1="28" y1="24" x2="42" y2="24" />
+                  <line x1="36" y1="24" x2="36" y2="30" />
+                  <line x1="42" y1="24" x2="42" y2="30" />
+                </svg>
+              </div>
+              <span class="cat-label">Access Report</span>
+            </button>
+
+            <!-- Device Report Card -->
+            <button class="circular-cat-btn" id="cardDeviceReport" aria-label="Open Device Report">
+              <div class="cat-circle-ring">
+                <!-- Fingerprint / Device Terminal SVG icon -->
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="8" y="10" width="18" height="30" rx="3" />
+                  <circle cx="17" cy="34" r="2" />
+                  <path d="M12 18h10" />
+                  <path d="M30 16c4 2 8 7 8 13v9" />
+                  <path d="M34 22c2 1 4 4 4 7v9" />
+                  <path d="M42 28v10" />
+                </svg>
+              </div>
+              <span class="cat-label">Device Report</span>
+            </button>
+
+            <!-- Door Report Card -->
+            <button class="circular-cat-btn" id="cardDoorReport" aria-label="Open Door Report">
+              <div class="cat-circle-ring">
+                <!-- Door Report SVG icon -->
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="8" y="8" width="32" height="34" rx="2" />
+                  <line x1="24" y1="8" x2="24" y2="42" />
+                  <circle cx="18" cy="26" r="2" />
+                  <circle cx="30" cy="26" r="2" />
+                  <rect x="12" y="2" width="24" height="6" rx="1" fill="#d90429" />
+                </svg>
+              </div>
+              <span class="cat-label">Door Report</span>
+            </button>
+
+            <!-- Custom Report Builder Card -->
+            <button class="circular-cat-btn" id="cardCustomReport" aria-label="Open Tender Custom Report Builder" title="Open Tender Custom Report Builder (User, Device, Door & Access Groups)">
+              <div class="cat-circle-ring" style="border-color: #0d9488;">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M28 8H12a4 4 0 00-4 4v24a4 4 0 004 4h24a4 4 0 004-4V20L28 8z" />
+                  <path d="M28 8v12h12" />
+                  <path d="M16 26h10" />
+                  <path d="M16 32h16" />
+                  <circle cx="34" cy="34" r="7" fill="#0d9488" stroke="#ffffff" stroke-width="2" />
+                  <path d="M32 34l2 2 4-4" stroke="#ffffff" stroke-width="2" />
+                </svg>
+              </div>
+              <span class="cat-label" style="color: #0f766e; font-weight: 700;">Custom Report</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. USER REPORT VIEW (Figure 03) -->
+      <section id="viewUserReport" class="fade-in" style="display: none;">
+        <div class="card-header-bar">
+          <h2 class="card-header-title">User Report</h2>
+        </div>
+
+        <div class="card-body">
+          <div class="category-nav-grid">
+            <button class="circular-cat-btn" data-user-sub="all" title="View Group / Department Users">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <circle cx="16" cy="18" r="5" />
+                  <circle cx="32" cy="18" r="5" />
+                  <circle cx="24" cy="30" r="5" />
+                </svg>
+              </div>
+              <span class="cat-label">Group Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-user-sub="Branch" title="View Branch Staff">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="10" y="12" width="28" height="26" rx="2" />
+                  <rect x="16" y="18" width="6" height="6" />
+                  <rect x="26" y="18" width="6" height="6" />
+                  <line x1="20" y1="38" x2="20" y2="28" />
+                  <line x1="28" y1="38" x2="28" y2="28" />
+                </svg>
+              </div>
+              <span class="cat-label">Branch Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-user-sub="Sub-Branch" title="View Sub-Branch Staff">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="8" y="18" width="14" height="20" />
+                  <rect x="26" y="14" width="14" height="24" />
+                  <line x1="6" y1="40" x2="42" y2="40" />
+                </svg>
+              </div>
+              <span class="cat-label">Sub-Br. Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-user-sub="RO" title="View Regional Office Users">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <circle cx="24" cy="24" r="16" />
+                  <path d="M12 24h24" />
+                  <path d="M24 8a20 20 0 010 32" />
+                </svg>
+              </div>
+              <span class="cat-label">RO Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-user-sub="HO" title="View Head Office Corporate Users">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <path d="M14 40V12l10-6 10 6v28" />
+                  <line x1="8" y1="40" x2="40" y2="40" />
+                  <circle cx="24" cy="20" r="2" fill="#d90429" />
+                </svg>
+              </div>
+              <span class="cat-label">Head Office Report</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. ACCESS REPORT VIEW (Figure 05 & 06) -->
+      <section id="viewAccessReport" class="fade-in" style="display: none;">
+        <div class="card-header-bar">
+          <h2 class="card-header-title">Access Report</h2>
+        </div>
+
+        <div class="card-body">
+          <div class="category-nav-grid">
+            <button class="circular-cat-btn" data-access-sub="all" title="View All Access Groups">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <circle cx="24" cy="24" r="14" />
+                  <circle cx="24" cy="24" r="6" />
+                  <line x1="24" y1="4" x2="24" y2="10" />
+                  <line x1="24" y1="38" x2="24" y2="44" />
+                </svg>
+              </div>
+              <span class="cat-label">All Access Group Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-access-sub="Branch" title="View Branch Access Groups">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="12" y="14" width="24" height="24" rx="3" />
+                  <path d="M18 24h12" />
+                  <circle cx="24" cy="20" r="3" />
+                </svg>
+              </div>
+              <span class="cat-label">Branch Wise Access Group</span>
+            </button>
+
+            <button class="circular-cat-btn" data-access-sub="Sub-Branch" title="View Sub-Branch Access Groups">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="10" y="20" width="12" height="18" />
+                  <rect x="26" y="14" width="12" height="24" />
+                </svg>
+              </div>
+              <span class="cat-label">Sub-Branch Wise Access Group</span>
+            </button>
+
+            <button class="circular-cat-btn" data-access-sub="Regional Office" title="View Region Access Groups">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <circle cx="24" cy="24" r="16" />
+                  <line x1="12" y1="24" x2="36" y2="24" />
+                </svg>
+              </div>
+              <span class="cat-label">Region Wise Access Group</span>
+            </button>
+
+            <button class="circular-cat-btn" data-access-sub="Head Office" title="View Head Office Access Groups">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <path d="M12 40V14l12-8 12 8v26" />
+                  <line x1="8" y1="40" x2="40" y2="40" />
+                </svg>
+              </div>
+              <span class="cat-label">Head Office Access Group</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. DEVICE REPORT VIEW (Figure 09 & 10) -->
+      <section id="viewDeviceReport" class="fade-in" style="display: none;">
+        <div class="card-header-bar">
+          <h2 class="card-header-title">Device Report</h2>
+        </div>
+
+        <div class="card-body">
+          <div class="category-nav-grid">
+            <button class="circular-cat-btn" data-device-sub="all">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="8" y="10" width="20" height="28" rx="2" />
+                  <rect x="20" y="16" width="20" height="24" rx="2" />
+                </svg>
+              </div>
+              <span class="cat-label">Total Device Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-device-sub="Branch">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="12" y="12" width="24" height="24" rx="2" />
+                  <circle cx="24" cy="24" r="4" />
+                </svg>
+              </div>
+              <span class="cat-label">Branch Device Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-device-sub="Sub-Branch">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="10" y="18" width="12" height="18" />
+                  <rect x="26" y="14" width="12" height="22" />
+                </svg>
+              </div>
+              <span class="cat-label">Sub-Branch Device Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-device-sub="Regional Office">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <circle cx="24" cy="24" r="14" />
+                  <rect x="20" y="18" width="8" height="12" />
+                </svg>
+              </div>
+              <span class="cat-label">RO Device Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-device-sub="Head Office">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <path d="M12 40V14l12-8 12 8v26" />
+                </svg>
+              </div>
+              <span class="cat-label">Head Office Device Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-device-sub="all">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <line x1="14" y1="16" x2="34" y2="16" />
+                  <line x1="14" y1="24" x2="28" y2="24" />
+                  <line x1="14" y1="32" x2="34" y2="32" />
+                  <circle cx="10" cy="16" r="2" fill="#d90429" />
+                  <circle cx="10" cy="24" r="2" fill="#d90429" />
+                  <circle cx="10" cy="32" r="2" fill="#d90429" />
+                </svg>
+              </div>
+              <span class="cat-label">Device Status Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-device-sub="Active">
+              <div class="cat-circle-ring ring-teal">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#0284c7" stroke-width="2.5">
+                  <circle cx="24" cy="24" r="16" />
+                  <path d="M16 24l6 6 12-12" />
+                </svg>
+              </div>
+              <span class="cat-label">Active Device Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-device-sub="Inactive">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <circle cx="24" cy="24" r="16" />
+                  <line x1="14" y1="14" x2="34" y2="34" />
+                </svg>
+              </div>
+              <span class="cat-label">Inactive Device Report</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. DOOR REPORT VIEW (Figure 07) -->
+      <section id="viewDoorReport" class="fade-in" style="display: none;">
+        <div class="card-header-bar">
+          <h2 class="card-header-title">Door Report</h2>
+        </div>
+
+        <div class="card-body">
+          <div class="category-nav-grid">
+            <button class="circular-cat-btn" data-door-sub="all" title="View All Monitored Doors">
+              <div class="cat-circle-ring ring-teal">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#0284c7" stroke-width="2.5">
+                  <rect x="8" y="8" width="32" height="34" rx="3" />
+                  <line x1="24" y1="8" x2="24" y2="42" />
+                  <circle cx="18" cy="25" r="2.5" fill="#0284c7" />
+                  <circle cx="30" cy="25" r="2.5" fill="#0284c7" />
+                </svg>
+              </div>
+              <span class="cat-label">All Door Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-door-sub="Branch" title="View Branch Wise Doors">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="10" y="12" width="28" height="26" rx="2" />
+                  <rect x="16" y="18" width="6" height="6" />
+                  <rect x="26" y="18" width="6" height="6" />
+                  <line x1="20" y1="38" x2="20" y2="28" />
+                  <line x1="28" y1="38" x2="28" y2="28" />
+                </svg>
+              </div>
+              <span class="cat-label">Branch Wise Door Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-door-sub="Sub-Branch" title="View Sub-Branch Wise Doors">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="8" y="18" width="14" height="20" />
+                  <rect x="26" y="14" width="14" height="24" />
+                  <line x1="6" y1="40" x2="42" y2="40" />
+                </svg>
+              </div>
+              <span class="cat-label">Sub-Branch Wise Door</span>
+            </button>
+
+            <button class="circular-cat-btn" data-door-sub="Regional Office" title="View Region Wise Doors">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <circle cx="24" cy="24" r="16" />
+                  <path d="M12 24h24" />
+                  <path d="M24 8a20 20 0 010 32" />
+                </svg>
+              </div>
+              <span class="cat-label">Region Wise Door Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-door-sub="Head Office" title="View Head Office Doors">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <path d="M14 40V12l10-6 10 6v28" />
+                  <line x1="8" y1="40" x2="40" y2="40" />
+                  <circle cx="24" cy="20" r="2" fill="#d90429" />
+                </svg>
+              </div>
+              <span class="cat-label">Head Office Door Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-door-sub="Attendance" title="View Attendance Checkpoint Doors">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="8" y="10" width="18" height="30" rx="2" />
+                  <circle cx="21" cy="25" r="1.5" fill="#d90429" />
+                  <circle cx="34" cy="27" r="9" />
+                  <polyline points="34 22 34 27 38 29" />
+                </svg>
+              </div>
+              <span class="cat-label">Attendance Door Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-door-sub="Access Control" title="View Access Control (ACS) Doors">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="8" y="10" width="18" height="30" rx="2" />
+                  <path d="M34 14l9 4.5v7c0 6-5 10.5-9 12-4-1.5-9-6-9-12v-7l9-4.5z" />
+                </svg>
+              </div>
+              <span class="cat-label">ACS Door Report</span>
+            </button>
+
+            <button class="circular-cat-btn" data-door-sub="Vault" title="View Vault & High Security Dual Custody Doors">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="8" y="8" width="32" height="32" rx="4" />
+                  <circle cx="24" cy="24" r="9" />
+                  <circle cx="24" cy="24" r="3" fill="#d90429" />
+                  <line x1="24" y1="10" x2="24" y2="15" />
+                  <line x1="24" y1="33" x2="24" y2="38" />
+                  <line x1="10" y1="24" x2="15" y2="24" />
+                  <line x1="33" y1="24" x2="38" y2="24" />
+                </svg>
+              </div>
+              <span class="cat-label">Vault & Security Doors</span>
+            </button>
+
+            <button class="circular-cat-btn" data-door-sub="Alarm" title="View Door Status & Alarm Monitored Doors">
+              <div class="cat-circle-ring">
+                <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                  <rect x="8" y="10" width="18" height="30" rx="2" />
+                  <path d="M34 16v9" />
+                  <circle cx="34" cy="30" r="1.5" fill="#d90429" />
+                  <path d="M28 17a8 8 0 0112 0" />
+                  <path d="M26 13a12 12 0 0116 0" />
+                </svg>
+              </div>
+              <span class="cat-label">Door Status & Alarms</span>
+            </button>
+      <!-- 7. TENDER CUSTOM REPORT BUILDER VIEW -->
+      <section id="viewCustomReport" class="fade-in" style="display: none;">
+        <div class="card-header-bar" style="background: linear-gradient(135deg, #042f2e 0%, #0f766e 100%); color: #fff;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3rem;">📋</span>
+            <div>
+              <h2 class="card-header-title" style="color: #fff; margin: 0;">Tender Custom Report Builder</h2>
+              <div style="font-size: 0.75rem; opacity: 0.9; margin-top: 2px;">
+                Tender Spec: Generation of custom User, Device (Status & Firmware), Door & Access Group reports
+              </div>
+            </div>
+          </div>
+          <div class="card-header-actions" style="display: flex; gap: 8px;">
+            <button class="btn btn-secondary" id="btnCustomExportCsv" style="background: #fff; color: #0f766e; font-weight: 700;">
+              📥 Export Custom CSV
+            </button>
+            <button class="btn btn-secondary" id="btnCustomPrint" style="border-color: rgba(255,255,255,0.4); color: #fff;">
+              🖨️ Print PDF Spec
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <!-- Entity Selection Tabs -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; margin-bottom: 14px;">
+            <button class="custom-ent-tab active" data-entity="users" style="padding: 10px; border-radius: 6px; border: 2px solid #0d9488; background: #f0fdfa; text-align: left; cursor: pointer;">
+              <div style="font-weight: 700; color: #0f766e; font-size: 0.9rem;">👤 User Group & Users</div>
+              <div style="font-size: 0.72rem; color: #64748b; margin-top: 2px;">Users, branches, biometric credentials</div>
+            </button>
+            <button class="custom-ent-tab" data-entity="devices" style="padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; text-align: left; cursor: pointer;">
+              <div style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">📟 Device Group & Devices</div>
+              <div style="font-size: 0.72rem; color: #64748b; margin-top: 2px;">Device status, firmware versions, IPs</div>
+            </button>
+            <button class="custom-ent-tab" data-entity="doors" style="padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; text-align: left; cursor: pointer;">
+              <div style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">🚪 Door Group & Doors</div>
+              <div style="font-size: 0.72rem; color: #64748b; margin-top: 2px;">Door requirements, ACS, vault custody</div>
+            </button>
+            <button class="custom-ent-tab" data-entity="access" style="padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; text-align: left; cursor: pointer;">
+              <div style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">🛡️ Access Group Reports</div>
+              <div style="font-size: 0.72rem; color: #64748b; margin-top: 2px;">Clearance tiers, mapped doors, schedules</div>
+            </button>
+            <button class="custom-ent-tab" data-entity="adhoc" style="padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; text-align: left; cursor: pointer;">
+              <div style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">⚡ Ad-hoc Group Generator</div>
+              <div style="font-size: 0.72rem; color: #64748b; margin-top: 2px;">Cross-entity unified report generator</div>
+            </button>
+          </div>
+
+          <!-- Filter Controls -->
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 14px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+              <div>
+                <label style="font-size: 0.72rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">Instant Search:</label>
+                <input type="text" id="customSearchInput" placeholder="Filter by keyword..." style="width: 100%; height: 32px; padding: 4px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.8rem;" />
+              </div>
+              <div>
+                <label style="font-size: 0.72rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">Organization Scope / Tier:</label>
+                <select id="customScopeSelect" style="width: 100%; height: 32px; padding: 4px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.8rem;">
+                  <option value="All">All Organizational Groups (Nationwide)</option>
+                  <option value="Head Office">Head Office (Principal Branch)</option>
+                  <option value="Regional Office">Regional Offices (29 ROs)</option>
+                  <option value="Branch">General Branches (519 Full Branches)</option>
+                  <option value="Sub-Branch">Sub-Branches (281 Upashakha)</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.72rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">Status Filter:</label>
+                <select id="customStatusSelect" style="width: 100%; height: 32px; padding: 4px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.8rem;">
+                  <option value="All">All Statuses</option>
+                  <option value="Active">Active / Online / Locked</option>
+                  <option value="Inactive">Inactive / Offline / Suspended / Alarm</option>
+                </select>
+              </div>
+              <div id="customFwFilterGroup">
+                <label style="font-size: 0.72rem; font-weight: 700; color: #0f766e; display: block; margin-bottom: 4px;">★ Firmware Version (Tender Spec):</label>
+                <select id="customFirmwareSelect" style="width: 100%; height: 32px; padding: 4px 8px; border: 1.5px solid #0d9488; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">
+                  <option value="All">All Firmware Versions</option>
+                  <option value="v1.4.2">v1.4.2</option>
+                  <option value="v2.1.0">v2.1.0</option>
+                  <option value="v1.5.0">v1.5.0</option>
+                  <option value="v1.2.8">v1.2.8</option>
+                  <option value="v1.1.4">v1.1.4</option>
+                  <option value="v2.0.2">v2.0.2</option>
+                  <option value="v1.3.1">v1.3.1</option>
+                  <option value="v1.0.8">v1.0.8</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Dynamic Column Selector Checkboxes -->
+            <div style="border-top: 1px solid #e2e8f0; padding-top: 8px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 0.75rem; font-weight: 700; color: #334155;">Customized Columns:</span>
+                <div>
+                  <button type="button" id="btnCustomSelectAllCols" style="background: none; border: none; color: #0d9488; font-size: 0.72rem; font-weight: 600; cursor: pointer;">Select All</button>
+                  <span style="color: #cbd5e1;">|</span>
+                  <button type="button" id="btnCustomResetCols" style="background: none; border: none; color: #64748b; font-size: 0.72rem; font-weight: 600; cursor: pointer;">Reset</button>
+                </div>
+              </div>
+              <div id="customColButtonsContainer" style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Custom Table Grid Output -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <strong style="font-size: 0.95rem; color: #1e293b;">Generated Records</strong>
+              <span id="customRecordCountBadge" style="background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">0 Records</span>
+            </div>
+          </div>
+          <div id="customTableWrapper" style="overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff;">
+            <!-- Rendered by js/reports.js -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Dynamic Flowchart / Architecture Canvas (Fig 06, 07, 10) -->
+    <section id="diagramContainer" aria-label="Hierarchy Flowchart Canvas"></section>
+
+    <!-- Dynamic Sub-report Data Table Grid -->
+    <section id="reportTableContainer" style="display: none;" aria-label="Sub-Report Data Grid"></section>
+
+    <!-- USAGE STATUS BAR (Present at bottom across Figures 01-05, 08-09) -->
+    <footer class="usage-card" role="contentinfo">
+      <h3 class="usage-title">Usage</h3>
+      <div class="usage-flex-row">
+        <!-- 9 Metric Badges -->
+        <div class="usage-metrics-container" id="usageMetricsList">
+          <!-- Injected dynamically by app.js -->
+        </div>
+
+        <!-- The "Report" Button with "Click Here" Indicator (Figure 01) -->
+        <div class="usage-report-action">
+          <div class="click-indicator">
+            <span class="arrow-left">⇦</span>
+            <span>Click Here</span>
+          </div>
+
+          <button class="circular-cat-btn" id="btnUsageReport" title="Open Reports Center">
+            <div class="cat-circle-ring">
+              <!-- Report Clipboard SVG icon -->
+              <svg class="cat-icon-svg" viewBox="0 0 48 48" fill="none" stroke="#d90429" stroke-width="2.5">
+                <rect x="10" y="8" width="28" height="34" rx="3" />
+                <path d="M18 8V6a2 2 0 012-2h8a2 2 0 012 2v2" />
+                <line x1="16" y1="18" x2="32" y2="18" />
+                <line x1="16" y1="24" x2="32" y2="24" />
+                <line x1="16" y1="30" x2="24" y2="30" />
+              </svg>
+            </div>
+            <span class="cat-label">Report</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Launch New Dashboard Modal -->
+  <dialog class="app-dialog" id="launchModal">
+    <div class="modal-header">
+      <h3>Launch New Dashboard Instance</h3>
+      <button class="modal-close-btn" id="btnCloseModal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>Configure and spawn a dedicated real-time monitoring console for multi-monitor setups:</p>
+      <ul class="modal-feature-list">
+        <li>🖥️ <strong>Live Biometric Wallboard</strong> (Real-time fingerprint & card verification stream)</li>
+        <li>🚨 <strong>Alarm & Tamper Command View</strong> (Perimeter breach telemetry)</li>
+        <li>📊 <strong>Executive Roll-Call & Attendance Display</strong></li>
+      </ul>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
+        All views operate synchronously via the central access control engine.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="document.getElementById('launchModal').close()">Cancel</button>
+      <button class="btn btn-secondary" style="background: var(--primary-brand); color: #fff;" onclick="window.open(window.location.href, '_blank', 'width=1280,height=800'); document.getElementById('launchModal').close();">
+        Launch Popout Window
+      </button>
+    </div>
+  </dialog>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/diagrams.js"></script>
+  <script src="js/reports.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
