@@ -216,18 +216,24 @@ function TopBar({ activeId, currentUser, onLogout, onOpenBioStarModal, onToggleM
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 6,
+            gap: 7,
             fontSize: 11,
             color: 'rgba(255,255,255,0.95)',
-            background: 'rgba(0,0,0,0.3)',
-            border: '1px solid rgba(255,255,255,0.2)',
+            background: 'rgba(15, 23, 42, 0.55)',
+            border: '1px solid rgba(56, 189, 248, 0.25)',
             padding: '4px 10px',
-            borderRadius: 4,
+            borderRadius: 6,
             cursor: 'pointer',
             transition: 'all 0.15s ease'
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(13, 148, 136, 0.45)'; e.currentTarget.style.borderColor = '#2dd4bf'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = 'rgba(14, 116, 144, 0.45)';
+            e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.6)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = 'rgba(15, 23, 42, 0.55)';
+            e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.25)';
+          }}
         >
           <span style={{
             width: 7,
@@ -237,66 +243,99 @@ function TopBar({ activeId, currentUser, onLogout, onOpenBioStarModal, onToggleM
             boxShadow: '0 0 6px rgba(16, 185, 129, 0.7)',
             flexShrink: 0
           }}></span>
-          <span>BioStar X: <strong style={{ color: '#34d399' }}>{gatewayStatus}</strong></span>
-          <span style={{ fontSize: 9, opacity: 0.75, marginLeft: 2 }}>⚙️</span>
+          <span>BioStar X: <strong style={{ color: '#38bdf8', fontFamily: 'monospace' }}>{gatewayStatus}</strong></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="12" height="12" style={{ opacity: 0.85, marginLeft: 2 }}>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
         </button>
 
         {/* Date Calendar */}
-        <div className="bs-topbar-badge">
+        <div className="bs-topbar-badge" style={{ borderRadius: 6 }}>
           <svg viewBox="0 0 20 20" fill="currentColor" width="11" height="11" style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle' }}>
             <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"/>
           </svg>
           {now}
         </div>
 
-        {/* Logged in Bank Officer */}
+        {/* Logged in Bank Officer - Enterprise SOC Security Badge */}
         {currentUser && (
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 10,
-            paddingLeft: 10,
-            borderLeft: '1px solid rgba(255,255,255,0.15)'
+            gap: 12,
+            paddingLeft: 12,
+            borderLeft: '1px solid rgba(255,255,255,0.18)'
           }}>
-            <div
-              title={`${currentUser.name} (${currentUser.designation || currentUser.roleTitle})`}
-              style={{
-                width: 28,
-                height: 28,
+            <div style={{ position: 'relative' }}>
+              <div
+                title={`${currentUser.name} (${currentUser.designation || currentUser.roleTitle}) · Pubali Bank SOC Controller`}
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 11.5,
+                  fontWeight: 800,
+                  color: '#ffffff',
+                  letterSpacing: '0.04em',
+                  border: '2px solid rgba(56, 189, 248, 0.5)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.35)',
+                  userSelect: 'none'
+                }}
+              >
+                {currentUser.initials || 'TH'}
+              </div>
+              {/* Online pulse indicator dot */}
+              <span style={{
+                position: 'absolute',
+                bottom: 0,
+                right: 0,
+                width: 9,
+                height: 9,
                 borderRadius: '50%',
-                background: currentUser.color || '#0d9488',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 11,
-                fontWeight: 800,
-                color: '#fff',
-                letterSpacing: '0.04em',
-                border: '1.5px solid rgba(255,255,255,0.3)',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-                userSelect: 'none'
-              }}
-            >
-              {currentUser.initials || (currentUser.name ? currentUser.name.split(' ').filter(n => n.length > 2).slice(0, 2).map(n => n[0]).join('').toUpperCase() : 'PB')}
+                background: '#10b981',
+                border: '1.5px solid #0f172a',
+                boxShadow: '0 0 6px #10b981'
+              }}></span>
             </div>
+
             <div style={{ lineHeight: 1.25 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#f8fafc', whiteSpace: 'nowrap' }}>
-                {currentUser.name}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#f8fafc', whiteSpace: 'nowrap', letterSpacing: '-0.01em' }}>
+                  {currentUser.name}
+                </span>
+                <span style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  background: 'rgba(14, 165, 233, 0.2)',
+                  border: '1px solid rgba(56, 189, 248, 0.4)',
+                  color: '#38bdf8',
+                  padding: '1px 5px',
+                  borderRadius: 3,
+                  fontFamily: 'monospace'
+                }}>
+                  {currentUser.id === 'PB-ADMIN' ? 'PB-10492' : currentUser.id}
+                </span>
               </div>
-              <div style={{ fontSize: 10, color: '#94a3b8', whiteSpace: 'nowrap' }}>
-                <span style={{ color: '#38bdf8', fontWeight: 600 }}>{currentUser.id}</span> · {currentUser.roleTitle}
+              <div style={{ fontSize: 10, color: '#94a3b8', whiteSpace: 'nowrap', marginTop: 1 }}>
+                <span>{currentUser.designation || (currentUser.roleTitle === 'Super Admin' ? 'SVP & Head of ICT Security' : currentUser.roleTitle)}</span>
               </div>
             </div>
+
             <button
               id="bank-logout-btn"
               onClick={onLogout}
-              title="Sign out of bank security portal"
+              title="Sign out of bank security portal and terminate active session"
               style={{
                 marginLeft: 4,
-                padding: '4px 10px',
-                borderRadius: 4,
-                border: '1px solid rgba(239, 68, 68, 0.4)',
-                background: 'rgba(239, 68, 68, 0.15)',
+                padding: '5px 11px',
+                borderRadius: 6,
+                border: '1px solid rgba(248, 113, 113, 0.35)',
+                background: 'rgba(239, 68, 68, 0.12)',
                 color: '#fca5a5',
                 fontSize: 11,
                 fontWeight: 600,
@@ -304,16 +343,25 @@ function TopBar({ activeId, currentUser, onLogout, onOpenBioStarModal, onToggleM
                 display: 'flex',
                 alignItems: 'center',
                 gap: 5,
-                transition: 'all 0.15s'
+                transition: 'all 0.15s ease'
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.3)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.15)'; }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(239, 68, 68, 0.25)';
+                e.currentTarget.style.borderColor = 'rgba(248, 113, 113, 0.7)';
+                e.currentTarget.style.color = '#ffffff';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'rgba(239, 68, 68, 0.12)';
+                e.currentTarget.style.borderColor = 'rgba(248, 113, 113, 0.35)';
+                e.currentTarget.style.color = '#fca5a5';
+              }}
             >
-              <svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12">
-                <path fillRule="evenodd" d="M3 4.25A2.25 2.25 0 015.25 2h5.5A2.25 2.25 0 0113 4.25v2a.75.75 0 01-1.5 0v-2a.75.75 0 00-.75-.75h-5.5a.75.75 0 00-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 00.75-.75v-2a.75.75 0 011.5 0v2A2.25 2.25 0 0110.75 18h-5.5A2.25 2.25 0 013 15.75V4.25z" clipRule="evenodd" />
-                <path fillRule="evenodd" d="M19 10a.75.75 0 00-.75-.75H8.704l2.47-2.47a.75.75 0 10-1.06-1.06l-3.75 3.75a.75.75 0 000 1.06l3.75 3.75a.75.75 0 101.06-1.06l-2.47-2.47H18.25A.75.75 0 0019 10z" clipRule="evenodd" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="12" height="12">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
               </svg>
-              <span>Logout</span>
+              <span>Sign Out</span>
             </button>
           </div>
         )}

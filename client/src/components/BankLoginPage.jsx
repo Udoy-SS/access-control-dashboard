@@ -1,66 +1,76 @@
 import React, { useState } from 'react';
 
-// Quick-fill presets for authentic bank role testing (clean initials instead of emojis)
+// Quick-fill presets for authentic bank role testing (realistic bank designations and credentials)
 const DEMO_ACCOUNTS = [
   {
-    roleTitle: 'Super Admin',
-    badge: 'ICT Security',
-    id: 'PB-ADMIN',
+    roleTitle: 'Chief Information Security Officer (CISO)',
+    badge: 'ICT Security Division',
+    id: 'PB-10492',
+    aliases: ['PB-ADMIN', 'PB-10492', 'TARIQUL'],
     pass: 'Pubali@2026',
     name: 'Engr. Tariqul Hasan',
     initials: 'TH',
-    designation: 'VP & Head of ICT Security',
-    branch: 'Head Office (Motijheel)',
-    color: '#0d9488'
+    designation: 'SVP & Head of Information Security',
+    branch: 'Head Office (Motijheel, Dhaka)',
+    color: '#0369a1',
+    clearance: 'L4 - TOP RESTRICTED (CORE & VAULTS)'
   },
   {
-    roleTitle: 'SOC Officer',
-    badge: 'Central Control',
-    id: 'PB-SOC01',
+    roleTitle: 'SOC Incident Commander',
+    badge: 'Central SOC Head Office',
+    id: 'PB-SOC-001',
+    aliases: ['PB-SOC01', 'PB-SOC-001'],
     pass: 'Soc@2026',
     name: 'Capt. (Retd.) M. A. Karim',
     initials: 'MK',
-    designation: 'Senior Security Operations Officer',
-    branch: 'Central SOC · Head Office',
-    color: '#dc2626'
+    designation: 'Senior Security Operations Controller',
+    branch: 'Central 24/7 SOC · Head Office',
+    color: '#b91c1c',
+    clearance: 'L3 - CENTRAL SOC & HARDWARE RELAYS'
   },
   {
-    roleTitle: 'Branch Manager',
-    badge: 'Motijheel',
-    id: 'PB-BM101',
+    roleTitle: 'Principal Branch Manager',
+    badge: 'Branch Command (0142)',
+    id: 'PB-BR-0142',
+    aliases: ['PB-BM101', 'PB-BR-0142'],
     pass: 'Branch@2026',
     name: 'Syed Nazmul Huda',
     initials: 'NH',
-    designation: 'Senior Vice President & Branch Manager',
-    branch: 'Principal Branch, Motijheel',
-    color: '#0284c7'
+    designation: 'Senior Vice President & Branch Head',
+    branch: 'Principal Branch, Motijheel (0142)',
+    color: '#047857',
+    clearance: 'L2 - BRANCH VAULT DUAL-CUSTODY'
   },
   {
-    roleTitle: 'HR Officer',
-    badge: 'Personnel Div',
-    id: 'PB-HR05',
+    roleTitle: 'HRMD Attendance Director',
+    badge: 'HRMD Biometrics',
+    id: 'PB-HR-0089',
+    aliases: ['PB-HR05', 'PB-HR-0089'],
     pass: 'Hr@2026',
     name: 'Fatema Tuz Zohra',
     initials: 'FZ',
-    designation: 'Senior Principal Officer, HRMD',
-    branch: 'HR Division · Head Office',
-    color: '#d97706'
+    designation: 'Senior Principal Officer, HRMD Biometrics',
+    branch: 'Human Resources Division · Head Office',
+    color: '#b45309',
+    clearance: 'L2 - NATIONWIDE ROSTER & PUNCH LEDGER'
   },
   {
-    roleTitle: 'Internal Audit',
-    badge: 'ICCD / BB',
-    id: 'PB-AUDIT',
+    roleTitle: 'ICCD Compliance Auditor',
+    badge: 'Internal Audit / BB',
+    id: 'PB-AUD-0021',
+    aliases: ['PB-AUDIT', 'PB-AUD-0021'],
     pass: 'Audit@2026',
     name: 'Khandakar M. Alam',
     initials: 'KA',
     designation: 'Joint Director, ICCD Audit Wing',
-    branch: 'Audit & Compliance Division',
-    color: '#7c3aed'
+    branch: 'Audit & Inspection Division',
+    color: '#6d28d9',
+    clearance: 'L3 - UNRESTRICTED AUDIT TRAIL LOGS'
   }
 ];
 
 export default function BankLoginPage({ onLoginSuccess }) {
-  const [employeeId, setEmployeeId] = useState('PB-ADMIN');
+  const [employeeId, setEmployeeId] = useState('PB-10492');
   const [password, setPassword] = useState('Pubali@2026');
   const [branch, setBranch] = useState('Head Office (Motijheel)');
   const [showPassword, setShowPassword] = useState(false);
@@ -85,8 +95,9 @@ export default function BankLoginPage({ onLoginSuccess }) {
 
     // Simulate bank authentication delay & token validation
     setTimeout(() => {
+      const q = employeeId.trim().toUpperCase();
       const matched = DEMO_ACCOUNTS.find(
-        a => a.id.toLowerCase() === employeeId.trim().toLowerCase()
+        a => a.id.toUpperCase() === q || (a.aliases && a.aliases.includes(q))
       );
 
       const userProfile = matched || {
@@ -94,9 +105,10 @@ export default function BankLoginPage({ onLoginSuccess }) {
         name: 'Bank Authorized Officer',
         initials: employeeId.trim().slice(0, 2).toUpperCase(),
         designation: 'Authorized Personnel',
-        roleTitle: 'Authorized Officer',
+        roleTitle: 'Authorized Security Officer',
         branch: branch,
-        color: '#0d9488'
+        color: '#0284c7',
+        clearance: 'L1 - STANDARD BRANCH ACCESS'
       };
 
       setIsLoading(false);
